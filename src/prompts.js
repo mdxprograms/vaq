@@ -1,5 +1,4 @@
 import inquirer from 'inquirer'
-import { infoMsg } from './colorStates'
 
 export const askForVimInfo = () => {
   const questions = [

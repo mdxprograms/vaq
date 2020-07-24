@@ -2,10 +2,11 @@
   "name": "vaq",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "bin": {
+    "vaq": "./lib/index.js"
+  },
   "scripts": {
-    "start": "parcel src/vaq.js --target node --bundle-node-modules -d lib",
-    "build": "parcel build src/vaq.js --target node --bundle-node-modules -d lib --no-source-maps",
+    "build": "rm -rf lib && parcel build src/vaq.js --target node --bundle-node-modules -d lib --no-source-maps --out-file index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import figlet from 'figlet'
 import clear from 'clear'
 import figStandard from 'figlet/importable-fonts/Standard.js'
