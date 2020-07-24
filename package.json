@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel src/vaq.js --target node --bundle-node-modules",
-    "build": "parcel build src/vaq.js --target node --bundle-node-modules",
+    "start": "parcel src/vaq.js --target node --bundle-node-modules -d lib",
+    "build": "parcel build src/vaq.js --target node --bundle-node-modules -d lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -22,6 +22,13 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "configstore": "^5.0.1",
+    "figlet": "^1.5.0",
+    "inquirer": "^7.3.3",
+    "minimist": "^1.2.5"
   }
 }
