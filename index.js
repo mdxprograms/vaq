@@ -2,14 +2,8 @@
 
 const figlet = require('figlet')
 const clear = require('clear')
-const { Spinner } = require('clui')
 
-const {
-  normalMsg,
-  errorMsg,
-  infoMsg,
-  successMsg
-} = require('./lib/colorStates')
+const { infoMsg, successMsg } = require('./lib/colorStates')
 const { savePlugin } = require('./lib/files')
 const { fetchAllPlugins, queryPlugins } = require('./lib/api')
 const {
@@ -21,10 +15,10 @@ const {
 const store = require('./lib/store')
 
 const sendCliHeading = () =>
-  normalMsg(
-    figlet.textSync('vaq', {
-      font: 'Doom',
-      horizontalLayout: 'full'
+  infoMsg(
+    figlet.textSync('Vim Awesome Query', {
+      font: 'Shadow',
+      horizontalLayout: 'fitted'
     })
   )
 
@@ -32,6 +26,13 @@ const runCommand = async (command) => {
   if (command === 'query') {
     const { query } = await askForQuery()
     const results = await queryPlugins({ query })
+    const { selection } = await askPluginSelection(results.plugins)
+
+    savePlugin(selection.github_url)
+  }
+
+  if (command === 'list') {
+    const results = await fetchAllPlugins()
     const { selection } = await askPluginSelection(results.plugins)
 
     savePlugin(selection.github_url)
@@ -50,19 +51,11 @@ const run = async () => {
   if (!store.get('vimpath')) {
     const { vimpath, vimtype } = await askForVimInfo()
 
-    const status = new Spinner('Getting set up...')
-    status.start()
-
     store.set('vimpath', vimpath)
     store.set('vimtype', vimtype)
 
-    status.stop()
-
     successMsg("Saved. Let's continue...")
-
     runMenu()
-
-    // display options
   } else {
     runMenu()
   }
