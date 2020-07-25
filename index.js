@@ -28,14 +28,14 @@ const runCommand = async (command) => {
     const results = await queryPlugins({ query })
     const { selection } = await askPluginSelection(results.plugins)
 
-    savePlugin(selection.github_url)
+    savePlugin(selection)
   }
 
   if (command === 'list') {
     const results = await fetchAllPlugins()
     const { selection } = await askPluginSelection(results.plugins)
 
-    savePlugin(selection.github_url)
+    savePlugin(selection)
   }
 }
 
