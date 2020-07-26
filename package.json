@@ -2,6 +2,7 @@
   "name": "vaq",
   "version": "1.0.0",
   "description": "A cli for managing vim plugins through vim-plug",
+  "main": "index.js",
   "bin": {
     "vaq": "index.js"
   },
@@ -18,7 +19,7 @@
     "automation"
   ],
   "author": "Josh Waller",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "eslint": "^7.5.0",
     "eslint-config-standard": "^14.1.1",
