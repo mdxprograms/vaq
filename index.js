@@ -5,7 +5,7 @@ const figlet = require('figlet')
 const clear = require('clear')
 
 const { infoMsg, errorMsg, successMsg } = require('./lib/colorStates')
-const { savePlugin, removePlugin } = require('./lib/files')
+const { savePlugin, removePlugin, updatePlugins } = require('./lib/files')
 const { getPlugNameFromConfig } = require('./lib/helpers')
 const { fetchPluginDetails, queryPlugins } = require('./lib/api')
 const {
@@ -29,18 +29,39 @@ const runCommand = async (command) => {
   if (command === 'query') {
     const { query } = await askForQuery()
     const results = await queryPlugins({ query })
-    const { selection } = await askPluginSelection(results.plugins)
+    const { selection, action } = await askPluginSelection(results.plugins)
 
-    savePlugin(selection)
+    switch (action) {
+      case 'info':
+        const details = await fetchPluginDetails(selection.slug)
+        Object.keys(details).forEach((val) =>
+          infoMsg(`${val}: ${details[val]}`)
+        )
+        runMenu()
+        break
+
+      case 'install':
+        savePlugin(selection)
+        runMenu()
+        break
+
+      case 'back':
+        runCommand('query')
+        break
+
+      case 'exit':
+        return false
+
+      default:
+        errorMsg('Invalid action for plugin')
+        return false
+    }
   }
 
   if (command === 'list') {
     const { plugin, action } = await installedPluginsList()
 
     switch (action) {
-      case 'update':
-        break
-
       case 'info':
         const details = await fetchPluginDetails(getPlugNameFromConfig(plugin))
         Object.keys(details).forEach((val) =>
@@ -55,7 +76,7 @@ const runCommand = async (command) => {
         break
 
       case 'back':
-        runMenu()
+        runCommand('list')
         break
 
       case 'exit':
@@ -65,6 +86,12 @@ const runCommand = async (command) => {
         errorMsg('Invalid action for plugin')
         return false
     }
+  }
+
+  if (command === 'update') {
+    updatePlugins()
+    successMsg('Plugins Updated!\n')
+    runMenu()
   }
 
   if (command === 'exit') {
@@ -87,7 +114,7 @@ const run = async () => {
     store.set('vimpath', vimpath)
     store.set('vimtype', vimtype)
 
-    successMsg("Saved. Let's continue...")
+    successMsg("Saved. Let's continue...\n")
     runMenu()
   } else {
     runMenu()
