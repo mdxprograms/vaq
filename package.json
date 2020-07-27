@@ -1,9 +1,10 @@
 {
   "name": "@wallerbuilt/vaq",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A cli for managing vim plugins through vim-plug",
   "main": "index.js",
   "private": false,
+  "repository": "https://github.com/mdxprograms/vaq",
   "bin": {
     "vaq": "index.js"
   },
