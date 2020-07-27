@@ -11,6 +11,8 @@ A CLI tool built to automate [vim-plug](https://github.com/junegunn/vim-plug) us
 - Uninstall plugins
 - Update plugins
 
+[![asciicast](https://asciinema.org/a/349806.svg)](https://asciinema.org/a/349806)
+
 ### Install
 
 `npm i -g @wallerbuilt/vaq`

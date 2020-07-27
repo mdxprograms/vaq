@@ -1,6 +1,6 @@
 {
   "name": "@wallerbuilt/vaq",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A cli for managing vim plugins through vim-plug",
   "main": "index.js",
   "private": false,
