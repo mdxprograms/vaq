@@ -1,5 +1,5 @@
 {
-  "name": "vaq",
+  "name": "@wallerbuilt/vaq",
   "version": "1.0.0",
   "description": "A cli for managing vim plugins through vim-plug",
   "main": "index.js",
